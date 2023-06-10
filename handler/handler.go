@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 )
 
 // Host is the current host that invokes HandleRequestFn.

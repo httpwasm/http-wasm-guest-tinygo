@@ -3,9 +3,9 @@ package handler
 import (
 	"runtime"
 
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/internal/imports"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/internal/mem"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/imports"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/mem"
 )
 
 // wasmRequest implements api.Request with imported WebAssembly functions.

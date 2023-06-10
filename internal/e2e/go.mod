@@ -1,10 +1,10 @@
-module github.com/http-wasm/http-wasm-guest-tinygo/e2e
+module github.com/httpwasm/http-wasm-guest-tinygo/e2e
 
-go 1.18
+go 1.20
 
 require (
-	github.com/http-wasm/http-wasm-guest-tinygo v0.0.0
-	github.com/http-wasm/http-wasm-host-go v0.5.1
+	github.com/httpwasm/http-wasm-guest-tinygo v0.0.0
+	github.com/httpwasm/http-wasm-host-go v0.5.1
 	github.com/stretchr/testify v1.8.4
 	github.com/tetratelabs/wazero v1.2.0
 )
@@ -15,4 +15,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/http-wasm/http-wasm-guest-tinygo => ../../
+replace github.com/httpwasm/http-wasm-guest-tinygo => ../../
+replace github.com/httpwasm/http-wasm-host-go => ../../../http-wasm-host-go

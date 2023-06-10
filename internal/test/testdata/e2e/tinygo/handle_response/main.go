@@ -3,8 +3,8 @@ package main
 import (
 	"strconv"
 
-	httpwasm "github.com/http-wasm/http-wasm-guest-tinygo/handler"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
+	httpwasm "github.com/httpwasm/http-wasm-guest-tinygo/handler"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 )
 
 func main() {

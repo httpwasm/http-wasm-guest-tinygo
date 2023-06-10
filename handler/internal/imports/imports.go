@@ -2,7 +2,7 @@
 
 package imports
 
-import "github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
+import "github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 
 //go:wasm-module http_handler
 //go:export enable_features

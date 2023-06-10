@@ -2,7 +2,7 @@
 
 package imports
 
-import "github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
+import "github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 
 // enableFeatures is stubbed for compilation outside TinyGo.
 func enableFeatures(features api.Features) api.Features {

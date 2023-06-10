@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/internal/imports"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/internal/mem"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/imports"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/mem"
 )
 
 // wasmHeader implements api.Header with imported WebAssembly functions.

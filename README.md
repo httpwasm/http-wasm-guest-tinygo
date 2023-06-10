@@ -1,5 +1,5 @@
-[![Build](https://github.com/http-wasm/http-wasm-guest-tinygo/workflows/build/badge.svg)](https://github.com/http-wasm/http-wasm-guest-tinygo)
-[![Go Report Card](https://goreportcard.com/badge/github.com/http-wasm/http-wasm-guest-tinygo)](https://goreportcard.com/report/github.com/http-wasm/http-wasm-guest-tinygo)
+[![Build](https://github.com/httpwasm/http-wasm-guest-tinygo/workflows/build/badge.svg)](https://github.com/httpwasm/http-wasm-guest-tinygo)
+[![Go Report Card](https://goreportcard.com/badge/github.com/httpwasm/http-wasm-guest-tinygo)](https://goreportcard.com/report/github.com/httpwasm/http-wasm-guest-tinygo)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 # http-wasm Guest Library for TinyGo
@@ -16,8 +16,8 @@ package main
 import (
 	"strings"
 
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler"
-	"github.com/http-wasm/http-wasm-guest-tinygo/handler/api"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 )
 
 func main() {
@@ -55,6 +55,6 @@ The current maturity phase is early draft. Once this is integrated with
 [1]: https://github.com/http-wasm
 [2]: https://webassembly.org/
 [3]: https://wazero.io/languages/tinygo/
-[4]: https://github.com/http-wasm/http-wasm-abi
+[4]: https://github.com/httpwasm/http-wasm-abi
 [5]: https://github.com/corazawaf/coraza-proxy-wasm
-[6]: https://github.com/http-wasm/components-contrib/
+[6]: https://github.com/httpwasm/components-contrib/
