@@ -149,6 +149,11 @@ type Response interface {
 	// Trailers allows access to any outgoing request trailing headers
 	// (trailers).
 	Trailers() Header
+
+	//SetTemplate 设置模板文件
+	SetTemplate(template string)
+	//GetTemplate 获取模板文件
+	GetTemplate() string
 }
 
 // Header is a key-value field in an HTTP message. This type is used regardless

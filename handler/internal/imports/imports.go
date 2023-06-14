@@ -29,6 +29,14 @@ func getMethod(ptr uintptr, limit BufLimit) (len uint32)
 func setMethod(ptr uintptr, size uint32)
 
 //go:wasm-module http_handler
+//go:export get_template
+func getTemplate(ptr uintptr, limit BufLimit) (len uint32)
+
+//go:wasm-module http_handler
+//go:export set_template
+func setTemplate(ptr uintptr, size uint32)
+
+//go:wasm-module http_handler
 //go:export get_uri
 func getURI(ptr uintptr, limit BufLimit) (len uint32)
 

@@ -77,3 +77,11 @@ func getStatusCode() uint32 {
 
 // setStatusCode is stubbed for compilation outside TinyGo.
 func setStatusCode(statusCode uint32) {}
+
+// getTemplate is stubbed for compilation outside TinyGo.
+func getTemplate(ptr uintptr, limit BufLimit) (len uint32) {
+	return 0
+}
+
+// setTemplate is stubbed for compilation outside TinyGo.
+func setTemplate(ptr uintptr, size uint32) {}

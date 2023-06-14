@@ -1,8 +1,11 @@
 package handler
 
 import (
+	"runtime"
+
 	"github.com/httpwasm/http-wasm-guest-tinygo/handler/api"
 	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/imports"
+	"github.com/httpwasm/http-wasm-guest-tinygo/handler/internal/mem"
 )
 
 // wasmResponse implements api.Response with imported WebAssembly functions.
@@ -34,4 +37,16 @@ func (wasmResponse) Body() api.Body {
 // Trailers implements the same method as documented on api.Response.
 func (wasmResponse) Trailers() api.Header {
 	return wasmResponseTrailers
+}
+
+// GetMethod implements the same template as documented on api.Response.
+func (wasmResponse) GetTemplate() string {
+	return mem.GetString(imports.GetTemplate)
+}
+
+// SetMethod implements the same template as documented on api.Response.
+func (wasmResponse) SetTemplate(template string) {
+	ptr, size := mem.StringToPtr(template)
+	imports.SetTemplate(uintptr(ptr), size)
+	runtime.KeepAlive(template) // keep method alive until ptr is no longer needed.
 }

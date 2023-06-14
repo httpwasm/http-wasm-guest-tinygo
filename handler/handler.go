@@ -15,6 +15,7 @@ var HandleRequestFn api.HandleRequest = func(api.Request, api.Response) (next bo
 }
 
 // handleRequest is only exported to the host.
+// wasm导出的函数,宿主host可以调用,使用 go:export 标记
 //
 //go:export handle_request
 func handleRequest() (ctxNext uint64) { //nolint
@@ -31,6 +32,7 @@ var HandleResponseFn api.HandleResponse = func(uint32, api.Request, api.Response
 }
 
 // handleResponse is only exported to the host.
+// wasm导出的函数,宿主host可以调用,使用 go:export 标记
 //
 //go:export handle_response
 func handleResponse(reqCtx uint32, isError uint32) { //nolint

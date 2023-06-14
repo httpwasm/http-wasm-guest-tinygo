@@ -58,3 +58,62 @@ The current maturity phase is early draft. Once this is integrated with
 [4]: https://github.com/httpwasm/http-wasm-abi
 [5]: https://github.com/corazawaf/coraza-proxy-wasm
 [6]: https://github.com/httpwasm/components-contrib/
+
+#  个人理解
+## wasm/guest处理流程  
+
+- 使用```//go:export```注解导出函数,httpwasm目前导出了两个函数 ```handle_request``` 和 ```handle_response```,  
+```handleRequest```  调用 ```HandleRequestFn```  
+```handle_response``` 调用  ```HandleResponseFn```  
+```go
+// 代码在 ./handler/handler.go#20
+
+// handleRequest is only exported to the host.
+// wasm导出的函数,宿主host可以调用,使用 go:export 标记
+//
+//go:export handle_request
+func handleRequest() (ctxNext uint64) { //nolint
+	next, reqCtx := HandleRequestFn(wasmRequest{}, wasmResponse{})
+}
+
+
+// handleResponse is only exported to the host.
+// wasm导出的函数,宿主host可以调用,使用 go:export 标记
+//
+//go:export handle_response
+func handleResponse(reqCtx uint32, isError uint32) { //nolint
+	HandleResponseFn(reqCtx, wasmRequest{}, wasmResponse{}, isErrorB)
+}
+```
+- 在wasm的main函数中指定```HandleRequestFn``` 和```HandleResponseFn```的实现. host-->guest.handle_request-->HandleRequestFn-->具体实现
+```go
+func main() {
+	handler.HandleRequestFn = handleRequest
+}
+
+// handleRequest implements a simple HTTP router.
+func handleRequest(req api.Request, resp api.Response) (next bool, reqCtx uint32) {
+}
+```
+```HandleRequestFn``` 有 ```api.Request``` 和 ```api.Response``` 两个接口参数,用来绑定host的request和reponse,下面说下如何实现
+```api.Request```接口实现是```wasmRequest```,```api.Response```接口实现是```wasmResponse```.实现再调用host 导入的函数,根据指定的数据格式进行交换,所以 wasm 默认不能处理并发请求.  
+
+- 导入host函数
+复杂的逻辑可以放到host端完成,通过imports导入函数,由guest wasm进行调用host的实现,主要通过指针地址和数据长度,完成数据交换  
+所有的函数名均为 小写 下划线进行连接,详见:https://http-wasm.io/rationale/#why-is-everything-lower_snake_case-instead-of-lower-hyphen-case  
+```./handler/internal/imports/imports.go``` 中,使用```//go:build tinygo.wasm```标识tinygo编译,以本次新增的方法为例
+
+```go
+//go:wasm-module http_handler
+//go:export get_template
+func getTemplate(ptr uintptr, limit BufLimit) (len uint32)
+
+//go:wasm-module http_handler
+//go:export set_template
+func setTemplate(ptr uintptr, size uint32)
+```
+  
+```//go:wasm-module http_handler``` wasm的模块名称是```http_handler```,host加载wasm的二进制文件,初始化模块名称时需要指定为```http_handler```  
+```//go:export get_template``` 这里的export,实际是host的import导入,就是导入host的函数,名称为 ```get_template```
+
+

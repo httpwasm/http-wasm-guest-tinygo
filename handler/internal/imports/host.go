@@ -178,3 +178,11 @@ func GetStatusCode() uint32 {
 func SetStatusCode(statusCode uint32) {
 	setStatusCode(statusCode)
 }
+
+func GetTemplate(ptr uintptr, limit BufLimit) (len uint32) {
+	return getTemplate(ptr, limit)
+}
+
+func SetTemplate(ptr uintptr, size uint32) {
+	setTemplate(ptr, size)
+}
