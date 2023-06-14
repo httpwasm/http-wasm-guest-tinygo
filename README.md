@@ -40,7 +40,7 @@ func handleRequest(req api.Request, resp api.Response) (next bool, reqCtx uint32
 }
 ```
 
-If you make changes, you can rebuild it like so:
+If you make changes, you can rebuild this with TinyGo v0.28 or higher like so:
 ```sh
 tinygo build -o examples/router/main.wasm -scheduler=none --no-debug -target=wasi examples/router/main.go
 ```
@@ -104,16 +104,13 @@ func handleRequest(req api.Request, resp api.Response) (next bool, reqCtx uint32
 ```./handler/internal/imports/imports.go``` 中,使用```//go:build tinygo.wasm```标识tinygo编译,以本次新增的方法为例
 
 ```go
-//go:wasm-module http_handler
-//go:export get_template
-func getTemplate(ptr uintptr, limit BufLimit) (len uint32)
+//go:wasmimport http_handler get_template
+func getTemplate(ptr uint32, limit BufLimit) (len uint32)
 
-//go:wasm-module http_handler
-//go:export set_template
-func setTemplate(ptr uintptr, size uint32)
+//go:wasmimport http_handler set_template
+func setTemplate(ptr, size uint32)
 ```
   
-```//go:wasm-module http_handler``` wasm的模块名称是```http_handler```,host加载wasm的二进制文件,初始化模块名称时需要指定为```http_handler```  
-```//go:export get_template``` 这里的export,实际是host的import导入,就是导入host的函数,名称为 ```get_template```
+``` //go:wasmimport http_handler get_template ``` wasm的模块名称是```http_handler```,host加载wasm的二进制文件,初始化模块名称时需要指定为```http_handler```,host的import导入函数,名称为 ```get_template```
 
 

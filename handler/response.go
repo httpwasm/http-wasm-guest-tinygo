@@ -47,6 +47,6 @@ func (wasmResponse) GetTemplate() string {
 // SetMethod implements the same template as documented on api.Response.
 func (wasmResponse) SetTemplate(template string) {
 	ptr, size := mem.StringToPtr(template)
-	imports.SetTemplate(uintptr(ptr), size)
+	imports.SetTemplate(ptr, size)
 	runtime.KeepAlive(template) // keep method alive until ptr is no longer needed.
 }
